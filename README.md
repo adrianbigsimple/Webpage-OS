@@ -142,6 +142,37 @@ You now have:
 
 ---
 
+## No Terminal? Use the Desktop App
+
+The steps above use the terminal. If you'd rather not touch it, the [Claude desktop
+app](https://code.claude.com/docs/en/desktop-quickstart) runs the same thing with a GUI.
+
+There is nothing to "install." This repo is a folder Claude reads — `CLAUDE.md` for the
+instructions and `.claude/skills/` for the 21 skills. Opening the folder *is* the setup.
+
+**1. Get the folder onto your computer.** Open the **Code** tab, start a session with
+environment **Local**, click **Select folder**, and pick any containing folder (say
+`Documents/Projects`). Then ask Claude in the chat:
+
+> clone https://github.com/adrianbigsimple/Webpage-OS.git here
+
+**2. Reopen the session inside the repo folder.** This is the step that matters. Start a
+**new** session and point **Select folder** at `Documents/Projects/Webpage-OS` — the repo
+folder itself, not the one above it. Claude only loads `CLAUDE.md` as project memory when
+it sits at the session root. Get this wrong and you'll get ordinary Claude, not Webpage OS.
+
+**3. Say hello.** That's it. The questionnaire starts on its own.
+
+Two things worth knowing:
+
+- **You still need Node.js 18+.** The desktop app bundles Claude Code itself, so you can
+  skip the CLI install — but your page is a real Next.js project, and building it needs
+  `npm` on your machine. See Step 2 above.
+- **You don't need to open `localhost:3000`.** Your page appears in the **Browser** pane
+  inside the app. `.claude/launch.json` in this repo already points it at `site/`.
+
+---
+
 ## Prerequisites
 
 | What | Why | How to Get It |
@@ -342,7 +373,8 @@ flowchart TD
 Webpage-OS/
 ├── CLAUDE.md                        # Instructions for Claude (the brain)
 ├── .claude/
-│   ├── settings.json                # Tool permissions (project defaults)
+│   ├── settings.local.json          # Tool permissions (project defaults)
+│   ├── launch.json                  # Dev server config for the desktop Browser pane
 │   └── skills/                      # 21 bundled skills (auto-loaded)
 │       ├── frontend-design/         # Design methodology + 7 reference docs
 │       ├── shadcn-ui/               # Component library guide
