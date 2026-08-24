@@ -140,6 +140,37 @@ Ahora tienes:
 
 ---
 
+## Sin Terminal? Usa la App de Escritorio
+
+Los pasos de arriba usan la terminal. Si prefieres no tocarla, la [app de escritorio de
+Claude](https://code.claude.com/docs/en/desktop-quickstart) hace lo mismo con interfaz grafica.
+
+Aqui no hay nada que "instalar". Este repo es una carpeta que Claude lee — `CLAUDE.md` con las
+instrucciones y `.claude/skills/` con los 21 skills. Abrir la carpeta *es* la instalacion.
+
+**1. Baja la carpeta a tu computadora.** Abre la pestana **Code**, crea una sesion con entorno
+**Local**, haz clic en **Select folder** y elige cualquier carpeta contenedora (por ejemplo
+`Documentos/Proyectos`). Luego pidele a Claude en el chat:
+
+> clona https://github.com/adrianbigsimple/Webpage-OS.git aqui
+
+**2. Reabre la sesion DENTRO de la carpeta del repo.** Este es el paso que importa. Crea una
+sesion **nueva** y apunta **Select folder** a `Documentos/Proyectos/Webpage-OS` — la carpeta del
+repo, no la de arriba. Claude solo carga `CLAUDE.md` como memoria del proyecto cuando esta en la
+raiz de la sesion. Si te equivocas aqui, vas a hablar con Claude normal, no con Webpage OS.
+
+**3. Saluda.** Ya. El cuestionario arranca solo.
+
+Dos cosas que vale la pena saber:
+
+- **Sigues necesitando Node.js 18+.** La app ya trae Claude Code, asi que te ahorras instalar el
+  CLI — pero tu pagina es un proyecto real de Next.js y construirla necesita `npm` en tu maquina.
+  Ve el Paso 2 de arriba.
+- **No tienes que abrir `localhost:3000`.** Tu pagina aparece en el panel **Browser** dentro de la
+  app. El `.claude/launch.json` de este repo ya lo apunta a `site/`.
+
+---
+
 ## Requisitos
 
 | Que | Para que | Como conseguirlo |
@@ -341,6 +372,7 @@ Webpage-OS/
 ├── CLAUDE.md                        # Instrucciones para Claude (el cerebro)
 ├── .claude/
 │   ├── settings.local.json          # Permisos de herramientas
+│   ├── launch.json                  # Config del dev server para el panel Browser
 │   └── skills/                      # 21 skills incluidos (se cargan solos)
 │       ├── frontend-design/         # Metodologia de diseno + 7 docs de referencia
 │       ├── shadcn-ui/               # Guia de componentes
