@@ -63,6 +63,23 @@ inventar una paleta que despues hay que tirar.
      es un MCP — solo dice donde estan sus cosas y tu ves si puedes llegar ahi.
    - Default: saltar.
 
+**0.5 Esta pagina se tiene que conectar con algo que ya usas?**
+   - Da ejemplos, no una lista tecnica: "Tienda en linea, agenda de citas, tu CRM, lista
+     de correos, cobros, analytics?"
+   - Si dice que si, pregunta **donde** vive eso — "Shopify", "Calendly", "Stripe" — y
+     nada mas. Los detalles de implementacion los resuelves tu con `docs/integrations.md`.
+   - Lee `docs/integrations.md` antes de prometer nada. Fija los cuatro niveles (A: link,
+     B: jalar datos al construir, C: widget del proveedor, D: API en vivo) y cual aplica
+     a cada integracion. **El nivel D queda fuera del alcance de este repo** — si alguien
+     lo necesita de verdad, dilo claro y ofrece B o C.
+   - **Nunca digas "conecte tu pagina por MCP".** Un MCP es una herramienta que TU usas
+     al construir; la pagina publicada no habla con ningun MCP. Si jalaste el catalogo de
+     Shopify, di eso: "Lei tu tienda y puse tus 6 productos en la pagina."
+   - No pidas llaves secretas ni tokens de admin. Ningun nivel A, B o C los necesita.
+   - Esto afecta el arquetipo y las secciones: una pagina con catalogo de productos no se
+     parece a una de captacion de leads. Tenlo presente en la Q0.1 y en la Fase 4.
+   - Default: no se conecta con nada. La mayoria de las landing pages no lo necesitan.
+
 Despues de la Ronda 0, resume lo que tienes: "Ok — la pagina es para [objetivo], y
 [tengo tu marca / la armo yo]. Ahora lo basico del negocio."
 
