@@ -91,14 +91,26 @@ claude
 
 Claude will read the project instructions and greet you. It knows it's supposed to help you build a landing page.
 
+You can also start it explicitly with the slash command:
+```
+/webpage-os
+```
+It takes the business name as an optional argument — `/webpage-os Lolita's Bakery` — and skips that question.
+
 ### Step 5: Answer the questions
 
-Claude will ask you about your business in 4 short rounds:
+Claude will ask you about your business in 5 short rounds:
 
+0. **Goal and brand** — What the page is for, and whether you already have brand guidelines or a folder of logos and photos
 1. **The basics** — Your business name, what you do, who your audience is
 2. **The look** — Colors, style, vibe (or say "you decide" and Claude picks for you)
 3. **The content** — What you want visitors to do, key features, tagline
 4. **Technical stuff** — Logo, images, whether you want to deploy
+
+Round 0 comes first on purpose. If you have a brand, Claude applies it instead of inventing
+one — and if you point it at a folder of assets, it uses your real logo and photos. Your
+answer to "what is this page for" also picks the page layout, so a page built to get you
+booked looks different from one built to establish credibility.
 
 **Don't know the answer?** Just say "you decide" or "I'm not sure" and Claude will make a good choice for you.
 
@@ -375,6 +387,7 @@ Webpage-OS/
 ├── .claude/
 │   ├── settings.local.json          # Tool permissions (project defaults)
 │   ├── launch.json                  # Dev server config for the desktop Browser pane
+│   ├── commands/                    # /webpage-os slash command
 │   └── skills/                      # 21 bundled skills (auto-loaded)
 │       ├── frontend-design/         # Design methodology + 7 reference docs
 │       ├── shadcn-ui/               # Component library guide

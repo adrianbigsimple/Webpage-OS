@@ -4,6 +4,71 @@ Ask questions conversationally in rounds. Don't read this file out loud — use 
 
 ---
 
+## Round 0: Goal and Brand (ALWAYS first)
+
+This round comes before everything else. What it surfaces drives the two biggest
+decisions in the project: the **goal** picks the page archetype (Phase 4), and the
+**brand** determines the design system (Round 2 and Phase 2). Asking this at the end
+means inventing a palette you then have to throw away.
+
+**0.1 What is this page for? What would have to happen for you to call it a success?**
+   - This is the business goal, not the industry. "I'm a dentist" isn't an answer;
+     "I want people to book appointments" is.
+   - If the answer is vague, push once: "Three months from now, what do you want to
+     be able to say?"
+   - Required. No default — the archetype comes from this.
+
+   Goal -> archetype mapping (`docs/landing-page-patterns.md`):
+
+   | What they want | Archetype |
+   |---|---|
+   | Get contacted, booked, or quoted | Conversion-Optimized |
+   | Sell a product directly | Hero-Centric |
+   | Validate an idea before building it | Minimal |
+   | Get hired (portfolio, freelance) | Storytelling |
+   | Be trusted (legal, health, finance) | Trust & Authority |
+   | Compete against known alternatives | Social-Proof-Heavy |
+   | Explain a product that doesn't explain itself | Interactive Demo or Feature-Rich |
+
+**0.2 Do you have brand guidelines, a brand book, or anything that defines your colors and fonts?**
+   - Accepts: PDF, file path, Figma link, Notion link, or "no".
+   - Local PDF: read it with the Read tool (it handles PDFs).
+   - A URL: use the `web-reader` skill.
+   - Extract and record: hex codes, font names, tone of voice, logo usage rules.
+   - **If the user has a defined brand, those values OVERRIDE `ui-ux-pro-max`.** Never
+     invent a palette on top of a brand that already exists.
+   - Default: none -> Round 2 builds the system from scratch.
+
+**0.3 Do you have a folder with your visual assets — logo, photos, icons?**
+   - Ask for the **folder path**, not individual files. That's how people actually keep
+     assets: a "Brand" or "Logos" folder, not memorized per-file paths.
+   - Scan whatever they give you: `ls -R "<path>"`
+   - Report what you found before moving on: "Found 3 logos, 12 photos, and a favicon."
+   - Flag what's usable: logo as SVG or PNG with transparency, photos 1200px or wider.
+   - Copy them into `site/public/images/` in Phase 4.
+   - If they answer this, questions 14, 15, and 16 in Round 4 are already answered —
+     don't re-ask them, just confirm what you found.
+   - Default: none.
+
+**0.4 Where does your brand live today?** (ask this ONLY if 0.2 and 0.3 came back empty)
+   - "Are your colors, logos, or photos in Canva, Google Drive, Notion, Figma, or Dropbox?"
+   - If they name a tool and an MCP for it is connected in the session, pull from it
+     instead of asking them to describe their brand from memory:
+     - **Canva** -> `list-brand-kits` returns the brand kit's palette and fonts
+     - **Google Drive** -> `search_files` for the logo and photos
+     - **Notion** -> `notion-search` for copy, content, or a brief they already wrote
+     - **Figma** -> ask for the public file link and use `web-reader`
+   - If they name a tool and no MCP is connected, say so plainly: "I don't have Canva
+     connected in this session. You can connect it, or just hand me the files."
+   - Don't turn this into a technical conversation. The user never needs to know what an
+     MCP is — they say where their stuff lives, you work out whether you can reach it.
+   - Default: skip.
+
+After Round 0, summarize what you have: "Got it — the page is for [goal], and [I have
+your brand / I'll design one]. Now the basics about the business."
+
+---
+
 ## Round 1: The Basics (always ask)
 
 1. **What's your business or project called?**
@@ -22,11 +87,25 @@ After Round 1, summarize: "Got it — [business] helps [audience] with [service]
 
 ## Round 2: Visual Direction
 
+**Before asking anything here, check what Round 0 surfaced.**
+
+- **If the user has a defined brand** (0.2 or 0.4 produced colors and fonts): invent
+  nothing. Questions 5 and 7 become a confirmation, not a choice: "Your guidelines use
+  #1B3A5C and Söhne. I'll apply those as-is — want me to propose something for what's
+  missing?" Run `ui-ux-pro-max` only for the gaps: if they have a palette but no fonts,
+  search fonts that pair with that palette.
+- **If they have no brand**: follow the questions as written below and build the system
+  from scratch.
+
+Replacing a brand that already exists with a generated palette is the worst mistake you
+can make in this phase. Users won't always correct you — sometimes they just leave.
+
 4. **Do you have any websites you like the look of?**
    - If yes: Use `web-reader` skill to analyze them. Note colors, layout, typography, vibe.
    - Default: Skip, choose based on industry.
 
 5. **Any color preferences, or should I pick based on your industry?**
+   - **If Round 0 already produced the brand palette, skip this and confirm instead.**
    - Default: Use `ui-ux-pro-max` to recommend. Run: `python3 .claude/skills/ui-ux-pro-max/scripts/search.py "<industry>" --domain color`
    - If search fails: Choose based on industry norms from `docs/design-guide.md`.
 
@@ -76,6 +155,10 @@ After Round 3, recap: "I have everything I need for content. A couple more techn
 
 ## Round 4: Technical (keep brief)
 
+**If Round 0 already gave you an assets folder, questions 14, 15, and 16 are already
+answered.** Don't re-ask — confirm what you found: "I'm using the SVG for the logo, and
+these three photos for the hero and services. Sound right?"
+
 14. **Do you have a logo?**
     - Accept: file path, URL, or "no"
     - Default: Text-only logo using the business name with the headline font.
@@ -118,6 +201,8 @@ Always tell the user what you chose and why, briefly: "I went with a warm palett
 ## After All Rounds
 
 Summarize the full brief back to the user:
+- **Page goal** and the archetype that follows from it
+- **Where the brand came from**: the user's guidelines, pulled from Canva/Drive/Notion, or designed by you
 - Business name and description
 - Target audience
 - Design direction (colors, fonts, vibe)

@@ -4,6 +4,70 @@ Haz las preguntas de forma conversacional por rondas. No leas este archivo en vo
 
 ---
 
+## Ronda 0: Objetivo y Marca (SIEMPRE primero)
+
+Esta ronda va antes que todo. Lo que salga aqui condiciona las dos decisiones grandes
+del proyecto: el **objetivo** determina el arquetipo de pagina (Fase 4) y la **marca**
+determina el sistema de diseno (Ronda 2 y Fase 2). Preguntar esto al final significa
+inventar una paleta que despues hay que tirar.
+
+**0.1 Para que es esta pagina? Que tendria que pasar para que digas que funciono?**
+   - Es el objetivo de negocio, no el giro. "Soy dentista" no es respuesta; "quiero que
+     me agenden cita" si.
+   - Si la respuesta es vaga, insiste una vez: "En tres meses, que quieres poder contar?"
+   - Obligatorio. Sin default — de aqui sale el arquetipo.
+
+   Mapeo objetivo -> arquetipo (`docs/landing-page-patterns.md`):
+
+   | Lo que quiere | Arquetipo |
+   |---|---|
+   | Que me contacten, agenden o coticen | Conversion-Optimized |
+   | Vender un producto directo | Hero-Centric |
+   | Validar una idea antes de construirla | Minimal |
+   | Que me contraten (portafolio, freelance) | Storytelling |
+   | Que confien en mi (legal, salud, finanzas) | Trust & Authority |
+   | Competir contra alternativas conocidas | Social-Proof-Heavy |
+   | Explicar un producto que no se entiende solo | Interactive Demo o Feature-Rich |
+
+**0.2 Tienes manual de marca, brand guideline o algo que defina tus colores y tipografias?**
+   - Acepta: PDF, ruta de archivo, link de Figma, link de Notion, o "no".
+   - Si es un PDF local: leelo con la herramienta Read (soporta PDF).
+   - Si es una URL: usa el skill `web-reader`.
+   - Extrae y anota: codigos hex, nombres de tipografias, tono de voz, reglas del logo.
+   - **Si el usuario tiene marca definida, esos valores MANDAN sobre `ui-ux-pro-max`.**
+     No inventes una paleta encima de una marca que ya existe.
+   - Default: no tiene -> la Ronda 2 arma el sistema desde cero.
+
+**0.3 Tienes una carpeta con tus activos visuales — logo, fotos, iconos?**
+   - Pide la **ruta de la carpeta**, no archivos sueltos. Es lo normal: la gente tiene
+     una carpeta "Marca" o "Logos", no rutas memorizadas archivo por archivo.
+   - Escanea lo que te den: `ls -R "<ruta>"`
+   - Reporta que encontraste antes de seguir: "Vi 3 logos, 12 fotos y un favicon."
+   - Marca cuales sirven: logo en SVG o PNG con transparencia, fotos de 1200px o mas.
+   - En la Fase 4 copialos a `site/public/images/`.
+   - Si contesta esto, las preguntas 14, 15 y 16 de la Ronda 4 ya estan respondidas —
+     no las repitas, solo confirma lo que encontraste.
+   - Default: no tiene.
+
+**0.4 Donde vive tu marca hoy?** (pregunta esto SOLO si 0.2 y 0.3 salieron vacias)
+   - "Tus colores, logos o fotos estan en Canva, Google Drive, Notion, Figma o Dropbox?"
+   - Si nombra una herramienta y hay un MCP conectado en la sesion, jala de ahi en vez
+     de pedirle que te describa la marca de memoria:
+     - **Canva** -> `list-brand-kits` trae paleta y tipografias del brand kit
+     - **Google Drive** -> `search_files` para el logo y las fotos
+     - **Notion** -> `notion-search` para copy, textos o el brief que ya tenga escrito
+     - **Figma** -> pide el link publico del archivo y usa `web-reader`
+   - Si nombra una herramienta y NO hay MCP conectado, dilo sin drama: "No tengo Canva
+     conectado en esta sesion. Puedes conectarlo, o pasarme los archivos directo."
+   - No conviertas esto en una conversacion tecnica. El usuario no tiene que saber que
+     es un MCP — solo dice donde estan sus cosas y tu ves si puedes llegar ahi.
+   - Default: saltar.
+
+Despues de la Ronda 0, resume lo que tienes: "Ok — la pagina es para [objetivo], y
+[tengo tu marca / la armo yo]. Ahora lo basico del negocio."
+
+---
+
 ## Ronda 1: Lo Basico (siempre preguntar)
 
 1. **Como se llama tu negocio o proyecto?**
@@ -22,11 +86,25 @@ Despues de la Ronda 1, resume: "Perfecto — [negocio] ayuda a [audiencia] con [
 
 ## Ronda 2: Direccion Visual
 
+**Antes de preguntar nada aqui, revisa que salio de la Ronda 0.**
+
+- **Si el usuario tiene marca definida** (0.2 o 0.4 dieron colores y tipografias): NO
+  inventes nada. Las preguntas 5 y 7 se vuelven una confirmacion, no una eleccion:
+  "Tu manual usa #1B3A5C y Söhne. Los aplico tal cual — quieres que proponga algo para
+  lo que falte?" Corre `ui-ux-pro-max` unicamente para los huecos: si trae paleta pero
+  no tipografias, busca solo tipografias que combinen con esa paleta.
+- **Si no tiene marca**: sigue las preguntas como estan escritas abajo y arma el sistema
+  desde cero.
+
+Sustituir una marca que ya existe por una paleta generada es el peor error que puedes
+cometer en esta fase. El usuario no siempre te va a corregir — a veces solo se va.
+
 4. **Tienes alguna pagina web que te guste como se ve?**
    - Si tiene: Usa el skill `web-reader` para analizarla. Nota colores, layout, tipografia, vibra.
    - Default: Saltar, elegir basado en la industria.
 
 5. **Tienes preferencia de colores, o quieres que yo elija basado en tu industria?**
+   - **Si la Ronda 0 ya dio la paleta de marca, salta esta pregunta y confirma.**
    - Default: Usa `ui-ux-pro-max`. Corre: `python3 .claude/skills/ui-ux-pro-max/scripts/search.py "<industria>" --domain color`
    - Si falla la busqueda: Elige basado en las normas de la industria en `docs/design-guide.md`.
 
@@ -76,6 +154,10 @@ Despues de la Ronda 3, resume: "Ya tengo todo lo que necesito para el contenido.
 
 ## Ronda 4: Tecnico (breve)
 
+**Si la Ronda 0 ya te dio una carpeta de assets, las preguntas 14, 15 y 16 ya estan
+respondidas.** No las repitas — confirma lo que encontraste: "Del logo uso el SVG, y
+de las fotos me quedo con estas tres para el hero y servicios. Te parece?"
+
 14. **Tienes un logo?**
     - Acepta: ruta de archivo, URL, o "no"
     - Default: Logo de solo texto usando el nombre del negocio con la fuente del titulo.
@@ -118,6 +200,8 @@ Siempre dile al usuario lo que elegiste y por que, brevemente: "Fui con una pale
 ## Despues de Todas las Rondas
 
 Resume el brief completo para el usuario:
+- **Objetivo de la pagina** y el arquetipo que sale de el
+- **Origen de la marca**: manual del usuario, jalada de Canva/Drive/Notion, o disenada por ti
 - Nombre y descripcion del negocio
 - Audiencia objetivo
 - Direccion de diseno (colores, fuentes, vibra)

@@ -18,6 +18,17 @@ Detect the user's language from their first message. If they write in Spanish, c
 
 If unsure, ask: "Would you prefer English or Spanish? / Prefieres ingles o espanol?"
 
+## Starting a Session
+
+Two ways in, same flow:
+
+- **`/webpage-os`** — the slash command in `.claude/commands/`. Starts the interview
+  explicitly, and accepts the business name as an argument: `/webpage-os Panaderia Lolita`.
+- **Just talking** — this file loads as project memory whenever the session's root folder
+  is this repo, so a plain "hi" starts the same flow.
+
+Either way you begin at **Round 0** of the questionnaire, never Round 1.
+
 ## Skills
 
 **13 skills are bundled** in `.claude/skills/` and load automatically — no installation needed:
@@ -83,7 +94,7 @@ Minimize user decisions. The user should only answer questionnaire questions and
 
 | Phase | User Input | Claude Does Automatically |
 |-------|-----------|-------------------------|
-| Phase 1: Discovery | Answers 4 rounds of questions | Summarizes, presents design direction |
+| Phase 1: Discovery | Answers 5 rounds of questions (Round 0 first) | Reads brand assets, summarizes, presents design direction |
 | Phase 2: Design System | Approves or requests changes | Selects archetype, finalizes colors/fonts |
 | Phase 3: Scaffold | Nothing — just watches | Runs all npm commands, installs dependencies |
 | Phase 4: Build | Nothing — just watches | Writes all files: layout.tsx, page.tsx, components |
@@ -99,18 +110,33 @@ Minimize user decisions. The user should only answer questionnaire questions and
 ## Workflow
 
 ### Phase 1: Discovery
-Read `docs/questionnaire.md` (or `docs/questionnaire-es.md` for Spanish). Ask questions conversationally in 4 rounds. Use smart defaults for anything the user skips or says "you decide."
+Read `docs/questionnaire.md` (or `docs/questionnaire-es.md` for Spanish). Ask questions conversationally in 5 rounds, **starting at Round 0**. Use smart defaults for anything the user skips or says "you decide."
+
+**Round 0 is not optional and does not come last.** It establishes the page's goal and
+whether the user already has a brand. Both decisions cascade: the goal picks the archetype
+in Phase 4, and the brand decides whether Phase 2 designs a system or applies an existing
+one. Running the visual rounds before you know these means generating a palette you then
+throw away — and asking a user to approve a design direction that ignores their own brand.
 
 If the user provides reference URLs, use the `web-reader` skill to analyze them. If they mention an industry you're unfamiliar with, use `deep-research`.
 
+If Round 0 surfaced a brand — from a PDF, a Figma link, or an MCP-connected tool like
+Canva or Google Drive — those colors and fonts **override** `ui-ux-pro-max` everywhere
+downstream. Only design what the brand leaves undefined.
+
 **Important:** After Round 2 (Visual Direction), PAUSE and present the design direction to the user. Get their approval BEFORE continuing to Round 3 (Content). If the user wants changes, adjust the direction and re-present until approved. This ensures content decisions are informed by the approved design.
 
-**NEXT:** After completing all 4 questionnaire rounds and confirming the brief, proceed immediately to Phase 2.
+**NEXT:** After completing all 5 questionnaire rounds and confirming the brief, proceed immediately to Phase 2.
 
 ### Phase 2: Design System
 **Note:** The design direction was already presented and approved during the Round 2 pause in Phase 1. Phase 2 refines that into a complete design system.
 
-Use `ui-ux-pro-max` to generate specific recommendations. If it fails, fall back to `docs/design-guide.md` — pick colors from the industry palette table, fonts from the vibe pairing table, and tell the user what you chose and why.
+**If Round 0 established a brand, this phase applies it — it does not replace it.** Use the
+user's hex codes and fonts as given, and run `ui-ux-pro-max` only for what's missing. When
+their brand font isn't on Google Fonts, say so and propose the closest Google-hosted match
+rather than silently substituting one.
+
+With no brand to honor, use `ui-ux-pro-max` to generate specific recommendations. If it fails, fall back to `docs/design-guide.md` — pick colors from the industry palette table, fonts from the vibe pairing table, and tell the user what you chose and why.
 
 Finalize and present the complete design system:
 - Exact hex codes for primary, accent, and neutral colors
@@ -213,9 +239,21 @@ Build the landing page inside `site/`. Write ALL files without asking for per-se
 - Use Google Fonts via `next/font/google` with `display: "swap"` and CSS variables
 
 #### Section Order
-Use the archetype from `docs/landing-page-patterns.md` that best fits the user's business type. Tell the user which archetype you chose and why: "Based on your [business type], I'm using the [Archetype] pattern because [reason]." Default order: Hero > Features/Services > Social Proof > CTA > Footer.
+Pick the archetype from `docs/landing-page-patterns.md` by the user's **goal** (Q0.1), not
+their industry. The goal-to-archetype table lives in Round 0 of the questionnaire. Two
+businesses in the same industry with different goals need different pages: a law firm
+chasing leads wants Conversion-Optimized, one building credibility wants Trust & Authority.
+
+Tell the user which archetype you chose and tie it to what they said they wanted: "You said
+you want people to book a consultation, so I'm using the Conversion-Optimized pattern —
+[reason]." Default order: Hero > Features/Services > Social Proof > CTA > Footer.
 
 #### Content Mapping (Questionnaire → Page)
+- **Page archetype:** From Q0.1 (the goal). Never from the industry.
+- **Colors and fonts:** From Q0.2 / Q0.4 when the user has a brand — these override
+  `ui-ux-pro-max`. Only generate what the brand leaves undefined.
+- **Logo, photos, favicon:** From the Q0.3 folder scan first. Q14/Q15/Q16 are the fallback
+  when Round 0 turned up nothing. Copy assets into `site/public/images/`.
 - **Hero `<h1>` headline:** Based on the user's tagline (Q11). If none, derive from their main benefit (Q9). Adapt for impact — short, punchy, memorable.
 - **Hero subheadline:** One sentence from Q2 (what they do) + Q3 (who they serve).
 - **CTA button text:** From Q8 (main action). Use the exact words the user chose.
