@@ -91,14 +91,26 @@ claude
 
 Claude va a leer las instrucciones del proyecto y te va a saludar. Ya sabe que su trabajo es ayudarte a construir una pagina web.
 
+Tambien lo puedes arrancar explicitamente con el slash command:
+```
+/webpage-os
+```
+Acepta el nombre del negocio como argumento — `/webpage-os Panaderia Lolita` — y se salta esa pregunta.
+
 ### Paso 5: Responde las preguntas
 
-Claude te va a preguntar sobre tu negocio en 4 rondas cortas:
+Claude te va a preguntar sobre tu negocio en 5 rondas cortas:
 
+0. **Objetivo y marca** — Para que es la pagina, y si ya tienes manual de marca o una carpeta con logos y fotos
 1. **Lo basico** — El nombre de tu negocio, a que se dedican, quien es tu audiencia
 2. **El look** — Colores, estilo, que onda quieres (o dile "tu decide" y Claude elige por ti)
 3. **El contenido** — Que quieres que hagan los visitantes, servicios clave, eslogan
 4. **Lo tecnico** — Logo, imagenes, si quieres publicar la pagina
+
+La Ronda 0 va primero a proposito. Si ya tienes marca, Claude la aplica en vez de inventarte
+una — y si le pasas la ruta de tu carpeta de activos, usa tu logo y tus fotos de verdad. Lo
+que contestes a "para que es esta pagina" tambien define el layout: una pagina hecha para que
+te agenden no se ve igual que una hecha para dar confianza.
 
 **No sabes la respuesta?** Solo di "tu decide" o "no estoy seguro" y Claude va a tomar una buena decision por ti.
 
@@ -373,6 +385,7 @@ Webpage-OS/
 ├── .claude/
 │   ├── settings.local.json          # Permisos de herramientas
 │   ├── launch.json                  # Config del dev server para el panel Browser
+│   ├── commands/                    # Slash command /webpage-os
 │   └── skills/                      # 21 skills incluidos (se cargan solos)
 │       ├── frontend-design/         # Metodologia de diseno + 7 docs de referencia
 │       ├── shadcn-ui/               # Guia de componentes
