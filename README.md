@@ -101,7 +101,7 @@ It takes the business name as an optional argument — `/webpage-os Lolita's Bak
 
 Claude will ask you about your business in 5 short rounds:
 
-0. **Goal and brand** — What the page is for, and whether you already have brand guidelines or a folder of logos and photos
+0. **Goal, brand, and connections** — What the page is for, whether you already have brand guidelines or a folder of logos and photos, and whether it needs to connect to something you use (a store, a booking calendar, a mailing list)
 1. **The basics** — Your business name, what you do, who your audience is
 2. **The look** — Colors, style, vibe (or say "you decide" and Claude picks for you)
 3. **The content** — What you want visitors to do, key features, tagline
@@ -418,6 +418,7 @@ Webpage-OS/
 │   ├── questionnaire-es.md          # Guided questions (Spanish)
 │   ├── design-guide.md              # Design principles & rules
 │   ├── landing-page-patterns.md     # 8 page archetypes
+│   ├── integrations.md              # Store, booking, payments, analytics
 │   ├── performance-checklist.md     # Core Web Vitals optimization
 │   ├── accessibility-checklist.md   # WCAG AA compliance
 │   ├── deployment-guide.md          # Vercel deployment

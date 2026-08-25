@@ -101,7 +101,7 @@ Acepta el nombre del negocio como argumento — `/webpage-os Panaderia Lolita` �
 
 Claude te va a preguntar sobre tu negocio en 5 rondas cortas:
 
-0. **Objetivo y marca** — Para que es la pagina, y si ya tienes manual de marca o una carpeta con logos y fotos
+0. **Objetivo, marca y conexiones** — Para que es la pagina, si ya tienes manual de marca o una carpeta con logos y fotos, y si necesita conectarse con algo que ya uses (tienda, agenda, lista de correos)
 1. **Lo basico** — El nombre de tu negocio, a que se dedican, quien es tu audiencia
 2. **El look** — Colores, estilo, que onda quieres (o dile "tu decide" y Claude elige por ti)
 3. **El contenido** — Que quieres que hagan los visitantes, servicios clave, eslogan
@@ -416,6 +416,7 @@ Webpage-OS/
 │   ├── questionnaire-es.md          # Preguntas guiadas (espanol)
 │   ├── design-guide.md              # Principios y reglas de diseno
 │   ├── landing-page-patterns.md     # 8 arquetipos de paginas
+│   ├── integrations.md              # Tienda, agenda, pagos, analytics
 │   ├── performance-checklist.md     # Optimizacion de Core Web Vitals
 │   ├── accessibility-checklist.md   # Cumplimiento WCAG AA
 │   ├── deployment-guide.md          # Deploy a Vercel

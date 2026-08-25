@@ -112,8 +112,8 @@ Minimize user decisions. The user should only answer questionnaire questions and
 ### Phase 1: Discovery
 Read `docs/questionnaire.md` (or `docs/questionnaire-es.md` for Spanish). Ask questions conversationally in 5 rounds, **starting at Round 0**. Use smart defaults for anything the user skips or says "you decide."
 
-**Round 0 is not optional and does not come last.** It establishes the page's goal and
-whether the user already has a brand. Both decisions cascade: the goal picks the archetype
+**Round 0 is not optional and does not come last.** It establishes the page's goal, whether
+the user already has a brand, and what the page has to connect to. Both decisions cascade: the goal picks the archetype
 in Phase 4, and the brand decides whether Phase 2 designs a system or applies an existing
 one. Running the visual rounds before you know these means generating a palette you then
 throw away — and asking a user to approve a design direction that ignores their own brand.
@@ -233,6 +233,10 @@ Build the landing page inside `site/`. Write ALL files without asking for per-se
 - **Overwrite the scaffold's `body { font-family: Arial, Helvetica, sans-serif }`.** Arial is
   on this repo's banned-font list; `create-next-app` hardcodes it. Replace it with your
   chosen Google Fonts before you finish the layout.
+- **Integrations** (from Q0.5): follow `docs/integrations.md`. Pick the lowest level that
+  does the job — a link often beats an embed. Level D (live API at runtime) is out of scope;
+  offer B or C instead of half-building it. Never put a secret key in the frontend, and
+  never claim the published page "connects through an MCP" — it doesn't.
 - See `docs/performance-checklist.md` for Core Web Vitals optimization
 - See `docs/accessibility-checklist.md` for WCAG AA compliance
 - Run ALL copy through `humanizer` skill (or manually check against AI patterns in `docs/design-guide.md`)
@@ -250,6 +254,9 @@ you want people to book a consultation, so I'm using the Conversion-Optimized pa
 
 #### Content Mapping (Questionnaire → Page)
 - **Page archetype:** From Q0.1 (the goal). Never from the industry.
+- **Integrations:** From Q0.5 — store, scheduling, newsletter, payments, analytics. These
+  add sections (a product grid, a booking block) and can change the CTA. See
+  `docs/integrations.md`.
 - **Colors and fonts:** From Q0.2 / Q0.4 when the user has a brand — these override
   `ui-ux-pro-max`. Only generate what the brand leaves undefined.
 - **Logo, photos, favicon:** From the Q0.3 folder scan first. Q14/Q15/Q16 are the fallback

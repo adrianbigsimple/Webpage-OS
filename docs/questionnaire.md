@@ -64,6 +64,23 @@ means inventing a palette you then have to throw away.
      MCP is — they say where their stuff lives, you work out whether you can reach it.
    - Default: skip.
 
+**0.5 Does this page need to connect to something you already use?**
+   - Give examples, not a technical list: "An online store, a booking calendar, your CRM,
+     a mailing list, payments, analytics?"
+   - If yes, ask **where** it lives — "Shopify", "Calendly", "Stripe" — and stop there.
+     You work out the implementation yourself from `docs/integrations.md`.
+   - Read `docs/integrations.md` before promising anything. It sets out the four levels
+     (A: link out, B: build-time pull, C: vendor embed, D: live API) and which one applies
+     to each integration. **Level D is out of scope for this repo** — if someone genuinely
+     needs it, say so plainly and offer B or C.
+   - **Never say "I connected your page through the MCP."** An MCP is a tool YOU use while
+     building; the published page never talks to one. If you pulled a Shopify catalog, say
+     that: "I read your store and put your 6 products on the page."
+   - Don't ask for secret keys or admin tokens. No level A, B, or C needs one.
+   - This shapes the archetype and the sections: a page with a product catalog looks
+     nothing like a lead-capture page. Factor it into Q0.1 and into Phase 4.
+   - Default: connects to nothing. Most landing pages don't need to.
+
 After Round 0, summarize what you have: "Got it — the page is for [goal], and [I have
 your brand / I'll design one]. Now the basics about the business."
 
