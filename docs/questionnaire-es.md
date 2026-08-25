@@ -106,10 +106,15 @@ Despues de la Ronda 1, resume: "Perfecto — [negocio] ayuda a [audiencia] con [
 **Antes de preguntar nada aqui, revisa que salio de la Ronda 0.**
 
 - **Si el usuario tiene marca definida** (0.2 o 0.4 dieron colores y tipografias): NO
-  inventes nada. Las preguntas 5 y 7 se vuelven una confirmacion, no una eleccion:
-  "Tu manual usa #1B3A5C y Söhne. Los aplico tal cual — quieres que proponga algo para
-  lo que falte?" Corre `ui-ux-pro-max` unicamente para los huecos: si trae paleta pero
-  no tipografias, busca solo tipografias que combinen con esa paleta.
+  inventes colores ni tipografias. Las preguntas 5 y 7 se vuelven una confirmacion, no una
+  eleccion: "Tu manual usa #1B3A5C y Söhne. Los aplico tal cual — quieres que proponga algo
+  para lo que falte?" Corre `ui-ux-pro-max --domain color` y `--domain typography` solo para
+  los huecos: si trae paleta pero no tipografias, busca solo tipografias que combinen.
+
+  **Tener marca NO apaga el resto del skill.** Un manual de marca define 3 de sus 10
+  dominios. Los otros siete — `style`, `ux`, `landing`, `product`, `chart`, `react`, `web` —
+  se consultan igual, con marca o sin ella. Ningun brand book te dice como estructurar un
+  hero ni que criterios de UX aplicar.
 - **Si no tiene marca**: sigue las preguntas como estan escritas abajo y arma el sistema
   desde cero.
 
