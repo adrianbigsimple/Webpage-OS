@@ -97,6 +97,19 @@ Tambien lo puedes arrancar explicitamente con el slash command:
 ```
 Acepta el nombre del negocio como argumento — `/webpage-os Panaderia Lolita` — y se salta esa pregunta.
 
+**No hay nada que instalar.** El comando es un archivo de este repo,
+`.claude/commands/webpage-os.md`, y Claude Code detecta solo los comandos del proyecto.
+Clonar es toda la instalacion — igual que los 21 skills.
+
+Vive con el repo, asi que existe unicamente dentro de esta carpeta y no te ensucia tus otros
+proyectos. (Un comando en `~/.claude/commands/` estaria disponible en todos lados, pero este
+se romperia ahi: depende del `CLAUDE.md`, de `docs/` y de los skills de este repo.)
+
+**Como confirmar que estas en la carpeta correcta:** escribe `/` y mira la lista. Si aparece
+`webpage-os`, tu sesion tiene la raiz en el repo. Si no aparece, la tiene en otro lado —
+Claude Code solo busca `.claude/` en tu carpeta de arranque y en las de **arriba**, nunca en
+las de abajo. Es la forma mas rapida de cachar el error de carpeta antes de empezar.
+
 ### Paso 5: Responde las preguntas
 
 Claude te va a preguntar sobre tu negocio en 5 rondas cortas:
