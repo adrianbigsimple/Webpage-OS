@@ -45,7 +45,7 @@ Either way you begin at **Round 0** of the questionnaire, never Round 1.
 | `playwright-cli` | Visual QA via browser screenshots |
 | `chrome-bridge-automation` | Fallback visual QA — connects to user's Chrome browser via Midscene. Vision-driven, no DOM needed. |
 | `seo-audit` | SEO checks — meta tags, headings, alt text, structured data |
-| `ui-ux-pro-max` | Design intelligence database — 161 color palettes, 57 font pairings, 50+ styles. Python CLI. |
+| `ui-ux-pro-max` | Design intelligence database, 10 searchable domains: `color`, `typography`, `google-fonts`, `style`, `ux`, `landing`, `product`, `chart`, `react`, `web`. 161 palettes, 57 font pairings, 50+ styles, 99 UX guidelines. Python CLI. |
 | `web-reader` | Analyze reference URLs the user provides |
 | `deep-research` | Systematic web research for industry-specific copy and content |
 
@@ -121,8 +121,13 @@ throw away — and asking a user to approve a design direction that ignores thei
 If the user provides reference URLs, use the `web-reader` skill to analyze them. If they mention an industry you're unfamiliar with, use `deep-research`.
 
 If Round 0 surfaced a brand — from a PDF, a Figma link, or an MCP-connected tool like
-Canva or Google Drive — those colors and fonts **override** `ui-ux-pro-max` everywhere
-downstream. Only design what the brand leaves undefined.
+Canva or Google Drive — those colors and fonts **override `ui-ux-pro-max`'s `color` and
+`typography` domains** downstream. Only design what the brand leaves undefined.
+
+That override is narrow on purpose. Brand guidelines define 3 of the skill's 10 domains;
+`style`, `ux`, `landing`, `product`, `chart`, `react` and `web` are unaffected and get
+consulted whether or not the user has a brand. A brand book gives you hex codes, not page
+architecture.
 
 **Important:** After Round 2 (Visual Direction), PAUSE and present the design direction to the user. Get their approval BEFORE continuing to Round 3 (Content). If the user wants changes, adjust the direction and re-present until approved. This ensures content decisions are informed by the approved design.
 
@@ -132,9 +137,11 @@ downstream. Only design what the brand leaves undefined.
 **Note:** The design direction was already presented and approved during the Round 2 pause in Phase 1. Phase 2 refines that into a complete design system.
 
 **If Round 0 established a brand, this phase applies it — it does not replace it.** Use the
-user's hex codes and fonts as given, and run `ui-ux-pro-max` only for what's missing. When
-their brand font isn't on Google Fonts, say so and propose the closest Google-hosted match
-rather than silently substituting one.
+user's hex codes and fonts as given, and run `ui-ux-pro-max --domain color` / `--domain
+typography` only for what's missing. Its other domains — `style`, `ux`, `landing`, `product`
+— still run: they answer questions no brand book covers. When their brand font isn't on
+Google Fonts, say so and propose the closest Google-hosted match rather than silently
+substituting one.
 
 With no brand to honor, use `ui-ux-pro-max` to generate specific recommendations. If it fails, fall back to `docs/design-guide.md` — pick colors from the industry palette table, fonts from the vibe pairing table, and tell the user what you chose and why.
 

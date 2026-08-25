@@ -106,11 +106,16 @@ After Round 1, summarize: "Got it — [business] helps [audience] with [service]
 
 **Before asking anything here, check what Round 0 surfaced.**
 
-- **If the user has a defined brand** (0.2 or 0.4 produced colors and fonts): invent
-  nothing. Questions 5 and 7 become a confirmation, not a choice: "Your guidelines use
-  #1B3A5C and Söhne. I'll apply those as-is — want me to propose something for what's
-  missing?" Run `ui-ux-pro-max` only for the gaps: if they have a palette but no fonts,
-  search fonts that pair with that palette.
+- **If the user has a defined brand** (0.2 or 0.4 produced colors and fonts): invent no
+  colors and no fonts. Questions 5 and 7 become a confirmation, not a choice: "Your
+  guidelines use #1B3A5C and Söhne. I'll apply those as-is — want me to propose something
+  for what's missing?" Run `ui-ux-pro-max --domain color` and `--domain typography` only for
+  the gaps: if they have a palette but no fonts, search fonts that pair with it.
+
+  **Having a brand does NOT switch the rest of the skill off.** Brand guidelines define 3 of
+  its 10 domains. The other seven — `style`, `ux`, `landing`, `product`, `chart`, `react`,
+  `web` — get consulted either way. No brand book tells you how to structure a hero or which
+  UX rules apply.
 - **If they have no brand**: follow the questions as written below and build the system
   from scratch.
 
