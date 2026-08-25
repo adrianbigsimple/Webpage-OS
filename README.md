@@ -97,6 +97,19 @@ You can also start it explicitly with the slash command:
 ```
 It takes the business name as an optional argument — `/webpage-os Lolita's Bakery` — and skips that question.
 
+**There's nothing to install.** The command is a file in this repo,
+`.claude/commands/webpage-os.md`, and Claude Code picks up project commands on its own.
+Cloning is the whole setup — same as the 21 skills.
+
+It lives with the repo, so it exists only inside this folder and won't clutter your other
+projects. (A command in `~/.claude/commands/` would be available everywhere, but this one
+would break there: it depends on this repo's `CLAUDE.md`, `docs/`, and skills.)
+
+**Quick way to check you're in the right place:** type `/` and look at the list. If
+`webpage-os` is there, your session is rooted at the repo. If it isn't, it's rooted somewhere
+else — Claude Code only looks for `.claude/` in your starting folder and the folders *above*
+it, never below. That's the fastest way to catch the wrong-folder mistake before you start.
+
 ### Step 5: Answer the questions
 
 Claude will ask you about your business in 5 short rounds:
